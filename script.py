@@ -1,9 +1,9 @@
 import requests
 
-# ناونیشانی سەرچاوەی تۆکنەکە
+# Linki serchaway tokenaka
 url = "http://104.160.15.138/XRmDByf1QHTLYakHbDjPfjcc__ih__9PyRiGk8d42qmaDaz5I1k__ih__pfXjxavgua9Bp1zAx5XSBR4M3827ybujacXDxBeB__hi__uNa"
 
-# ئەم بەشە زۆر گرنگە بۆ ئەوەی سێرڤەرەکە فێڵت لێ نەگرێت
+# Headers bo away serveraka fely lenagret
 headers = {
     "User-Agent": "And$MyTV/1.1",
     "Host": "104.160.15.138",
@@ -13,23 +13,23 @@ headers = {
 
 def update_link():
     try:
-        # ناردنی داواکاری بە زانیارییە مۆبایلییەکانەوە
+        # Nardni dawakari bo server
         response = requests.get(url, headers=headers, timeout=20)
         
-        if response.status_code == 200 and response.text.strip():
-            new_link = response.text.strip()
+        if response.status_code == 200:
+            token_data = response.text.strip()
             
-            # دروستکردنی فایلی m3u8 بە لینکی نوێوە
+            # Drustkrdni faily m3u
             with open("playlist.m3u", "w", encoding="utf-8") as f:
                 f.write("#EXTM3U\n")
                 f.write("#EXTINF:-1,Falcon Eye HD\n")
-                f.write(new_link)
-            print("سەرکەوتوو بوو: لینکەکە نوێ کرایەوە.")
+                f.write(token_data)
+            print("Serkawtw bw! Linkaka nwe krayawa.")
         else:
-            print(f"سێرڤەر وەڵامی نەدا. کۆدی هەڵە: {response.status_code}")
+            print(f"Server error: {response.status_code}")
             
     except Exception as e:
-        print(f"کێشەیەک ڕوویدا: {e}")
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     update_link()
