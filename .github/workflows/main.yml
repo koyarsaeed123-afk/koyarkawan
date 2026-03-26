@@ -14,10 +14,11 @@ jobs:
           python-version: '3.x'
       - run: pip install requests
       - run: python script.py
-      - name: Save
+      - name: Save changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add falcon_eye.m3u
-          git commit -m "Update" || exit 0
+          git add playlist.m3u
+          git commit -m "Update Link" || exit 0
           git push
+          
