@@ -1,0 +1,23 @@
+name: Update-Link
+on:
+  schedule:
+    - cron: '*/20 * * * *' # هەموو ٢٠ خولەک جارێک خۆی ئیش دەکات
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - run: pip install requests
+      - run: python script.py
+      - name: Save changes
+        run: |
+          git config --global user.name "Bot"
+          git config --global user.email "bot@github.com"
+          git add falcon_eye.m3u
+          git commit -m "Update Link" || exit 0
+          git push
