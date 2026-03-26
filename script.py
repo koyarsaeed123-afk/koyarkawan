@@ -12,8 +12,8 @@ def update():
     try:
         response = requests.get(url, headers=headers, timeout=20)
         if response.status_code == 200:
-            # ناوی فایلەکە لێرە گرنگە
-            with open("playlist.m3u", "w", encoding="utf-8") as f:
+            # لێرەدا ناوی فایلەکەمان داناوە بە falcon_eye.m3u بۆ ئەوەی گیتھەب بیدۆزێتەوە
+            with open("falcon_eye.m3u", "w", encoding="utf-8") as f:
                 f.write("#EXTM3U\n#EXTINF:-1,Falcon Eye HD\n" + response.text.strip())
             print("Success!")
         else:
